@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đào Tạo 5G Nội Bộ | Viettel Networks — TTKTKV2</title>
+    <meta name="description" content="Chương trình đào tạo nội bộ khái niệm cơ bản & chức năng mạng 5G. 11/05/2026. Đăng ký trước 10/05/2026.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@500;700;800&family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --viettel-red: #E30613;
+            --red-dark: #B30000;
+            --black: #0A0A0A;
+            --gray-4: #F5F5F5;
+            --white: #FFFFFF;
+            
+            --font-display: 'Montserrat', sans-serif; /* Fallback cho FS Magistral */
+            --font-body: 'Inter', sans-serif; /* Fallback cho PF BeauSans Pro */
+            --font-mono: 'Roboto', sans-serif;
+            
+            --spacing-unit: 8px;
+        }
+
+        /* Base Styles & Resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--black);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+
+        /* Layout & Utilities */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .text-center { text-align: center; }
+        .text-red { color: var(--viettel-red); }
+        .bg-dark { background-color: var(--black); color: var(--white); }
+        .bg-gray { background-color: var(--gray-4); }
+
+        .btn {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-weight: 700;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 200ms ease-out;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--viettel-red);
+            color: var(--white);
+            padding: 16px 40px;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--red-dark);
+            transform: scale(1.02);
+        }
+
+        .section-padding { padding: 96px 0; }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background-color: var(--viettel-red);
+            margin: 0 auto 48px auto;
+        }
+
+        /* SECTION 01: Navigation */
+        nav {
+            background-color: var(--black);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        @media (min-width: 1024px) {
+            nav { height: 64px; }
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .nav-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-logo-area span {
+            font-size: 14px;
+            color: #CCCCCC;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-logo-area span { display: block; }
+        }
+
+        .nav-links {
+            display: none;
+            gap: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-links { display: flex; }
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: #CCCCCC;
+            transition: 200ms;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+            text-decoration: underline;
+            text-decoration-color: var(--viettel-red);
+        }
+
+        .nav-actions {
+            display: none;
+            align-items: center;
+            gap: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-actions { display: flex; }
+        }
+
+        .nav-contact { font-size: 14px; color: #CCCCCC; }
+        .nav-btn {
+            background-color: var(--viettel-red);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .nav-btn:hover { background-color: var(--red-dark); }
+
+        .hamburger {
+            display: block;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (min-width: 1024px) {
+            .hamburger { display: none; }
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #1A1A1A;
+            flex-direction: column;
+            padding: 16px 24px;
+            gap: 16px;
+        }
+        .mobile-menu.active { display: flex; }
+
+        /* SECTION 02: Hero */
+        .hero {
+            min-height: 500px;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 40%, #3D0000 100%);
+            display: flex;
+            align-items: center;
+            padding: 64px 0;
+            color: var(--white);
+        }
+        
+        @media (min-width: 1024px) {
+            .hero { min-height: 600px; }
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--viettel-red);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 56px; }
+        }
+
+        .hero-sub {
+            font-size: 18px;
+            color: #CCCCCC;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 16px;
+            font-size: 13px;
+            color: #AAAAAA;
+        }
+
+        /* SECTION 03: Uy Tin */
+        .uy-tin {
+            background-color: var(--gray-4);
+            padding: 24px 0;
+        }
+
+        .uy-tin-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            text-align: center;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .uy-tin-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* SECTION 04: Lợi Ích */
+        .loi-ich-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        @media (min-width: 1024px) {
+            .loi-ich-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .card {
+            background-color: var(--white);
+            border: 1px solid #CCCCCC;
+            border-radius: 8px;
+            padding: 32px;
+            transition: all 200ms ease-out;
+        }
+
+        .card:hover {
+            border-color: var(--viettel-red);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: scale(1.02);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            color: var(--viettel-red);
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* SECTION 05: Nội Dung */
+        .noi-dung-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media (min-width: 1024px) {
+            .noi-dung-layout { grid-template-columns: 1fr 1fr; align-items: center; }
+        }
+
+        .nd-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .nd-list { grid-template-columns: 1fr 1fr; }
+        }
+
+        .nd-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #333333;
+        }
+
+        /* SECTION 06: Cách thức */
+        .step-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        @media (min-width: 1024px) {
+            .step-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .step-num {
+            font-family: var(--font-display);
+            font-size: 64px;
+            color: var(--viettel-red);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        /* SECTION 08: Form Đăng Ký */
+        .form-wrapper {
+            background-color: var(--white);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 48px 24px;
+            border: 1px solid #CCCCCC;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        @media (min-width: 768px) {
+            .form-wrapper { padding: 64px; }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            transition: all 200ms;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--viettel-red);
+            box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
+        }
+
+        .form-control.error {
+            border-color: var(--viettel-red);
+            background-color: #FFF0F0;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* SECTION 09: FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #333333;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 16px;
+            text-align: left;
+            padding: 24px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: #CCCCCC;
+            font-size: 15px;
+        }
+
+        .faq-answer p {
+            padding-bottom: 24px;
+        }
+
+        .faq-icon {
+            color: var(--viettel-red);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* SECTION 10: Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, var(--viettel-red) 0%, var(--red-dark) 100%);
+            color: var(--white);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .cd-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cd-num {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .cd-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #FFB3B3;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+
+        .btn-white {
+            background-color: var(--white);
+            color: var(--viettel-red);
+            padding: 18px 56px;
+            font-size: 18px;
+        }
+
+        .btn-white:hover {
+            background-color: var(--gray-4);
+            transform: scale(1.02);
+        }
+
+        /* SECTION 12: Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 48px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .footer-links a {
+            display: inline-block;
+            margin-right: 16px;
+            color: #AAAAAA;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a:hover { color: var(--white); }
+        
+        .footer-contact p {
+            color: #CCCCCC;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333333;
+            padding-top: 24px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #7F7F7F;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container nav-container">
+            <div class="nav-logo-area">
+                <strong style="font-family: var(--font-display); font-size: 20px; color: var(--viettel-red);">VIETTEL</strong>
+                <span>Trung tâm Kỹ thuật KV2</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#gioi-thieu">Giới thiệu</a>
+                <a href="#noi-dung">Nội dung</a>
+                <a href="#thoi-gian">Thời gian</a>
+                <a href="#dang-ky">Đăng ký</a>
+                <a href="#lien-he">Liên hệ</a>
+            </div>
+
+            <div class="nav-actions">
+                <span class="nav-contact">📞 0975 616 363</span>
+                <a href="#dang-ky" class="btn nav-btn">ĐĂNG KÝ NGAY</a>
+            </div>
+
+            <button class="hamburger" id="hamburger-btn">☰</button>
+        </div>
+        
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#gioi-thieu">Giới thiệu</a>
+            <a href="#noi-dung">Nội dung</a>
+            <a href="#thoi-gian">Thời gian</a>
+            <a href="#dang-ky">Đăng ký</a>
+            <a href="#lien-he">Liên hệ</a>
+            <a href="#dang-ky" class="btn nav-btn" style="text-align: center;">ĐĂNG KÝ NGAY</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="gioi-thieu">
+        <div class="container">
+            <span class="hero-label">🎓 ĐÀO TẠO NỘI BỘ | Thứ Hai, 11/05/2026</span>
+            <h1>Làm Chủ Kiến Thức 5G —<br><span class="text-red">Từ Khái Niệm Đến Thực Tế</span></h1>
+            <p class="hero-sub">Chương trình đào tạo nội bộ dành cho CBCNV, giúp bạn nắm vững nền tảng mạng 5G và ứng dụng vào công việc.</p>
+            
+            <a href="#dang-ky" class="btn btn-primary">🔴 ĐĂNG KÝ THAM GIA</a>
+            <div style="font-size: 14px; margin-top: 8px; color: #CCCCCC;">⏳ Hạn đăng ký: 10/05/2026</div>
+            
+            <div class="hero-badges">
+                <span>✅ Miễn phí</span> | 
+                <span>✅ Cấp chứng nhận</span> | 
+                <span>✅ Online + Offline</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="uy-tin">
+        <div class="container uy-tin-grid">
+            <div>🏅 Chứng nhận hoàn thành nội bộ Viettel</div>
+            <div>📋 Thi & chấm điểm qua hệ thống LXP chính thức</div>
+            <div>🎓 Blended Learning — Online & Offline</div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center">Tại Sao Tham Gia Khóa Học Này?</h2>
+            <div class="accent-line"></div>
+            
+            <div class="loi-ich-grid">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Kiến thức chuẩn & hệ thống</h3>
+                    <p>Nắm trọn 8 chủ đề nền tảng 5G từ tổng quan đến kỹ thuật chuyên sâu.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📜</div>
+                    <h3>Chứng nhận chính thức</h3>
+                    <p>Hoàn thành khóa học, vượt bài thi 7/10 điểm — nhận chứng nhận nội bộ ngay.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💼</div>
+                    <h3>Ứng dụng thực tế vào công việc</h3>
+                    <p>Hiểu hệ thống 5G để làm việc hiệu quả hơn với hạ tầng và thiết bị thực tế.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-dark" id="noi-dung">
+        <div class="container noi-dung-layout">
+            <div>
+                <h2 class="section-title">Bạn Sẽ Học Những Gì?</h2>
+                <p style="color: #CCCCCC; margin-bottom: 32px;">8 chủ đề trọng tâm, 3 giờ học chuyên sâu với giảng viên có kinh nghiệm thực chiến.</p>
+            </div>
+            
+            <div class="nd-list">
+                <div class="nd-item"><span class="text-red">📡</span><span>Tổng quan 5G & 3 lĩnh vực dịch vụ (eMBB, mIoT, URLLC)</span></div>
+                <div class="nd-item"><span class="text-red">📶</span><span>Scalable Numerology — khoảng sóng mang con (SCS)</span></div>
+                <div class="nd-item"><span class="text-red">⚡</span><span>Self-contained Slots — truyền DL/UL tốc độ cao</span></div>
+                <div class="nd-item"><span class="text-red">📊</span><span>Băng thông kênh & Resource Blocks (RB)</span></div>
+                <div class="nd-item"><span class="text-red">🔀</span><span>Bandwidth Part (BWP) — phân bổ băng thông linh hoạt</span></div>
+                <div class="nd-item"><span class="text-red">〰️</span><span>Dạng sóng 5G NR — OFDM & DFT-s-OFDM</span></div>
+                <div class="nd-item"><span class="text-red">🕐</span><span>Cấu hình TDD — sắp xếp DL/UL theo thời gian</span></div>
+                <div class="nd-item"><span class="text-red">📡</span><span>Massive MIMO & Beam Sweeping — beamforming 5G</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-gray" id="thoi-gian">
+        <div class="container">
+            <h2 class="section-title text-center">Tham Gia Chỉ Trong 3 Bước</h2>
+            
+            <div class="step-grid mt-8">
+                <div>
+                    <div class="step-num">01</div>
+                    <h3 style="font-size: 24px; margin-bottom: 16px;">Đăng Ký</h3>
+                    <p>Điền form đăng ký trước ngày 10/05/2026. Cung cấp Mã nhân viên, họ tên và hoàn thành bài khảo sát kiến thức đầu vào.</p>
+                </div>
+                <div>
+                    <div class="step-num">02</div>
+                    <h3 style="font-size: 24px; margin-bottom: 16px;">Tham Gia Học</h3>
+                    <p>8h30–12h00, Thứ Hai 11/05/2026. Tại tầng 5 – Tòa nhà TTKTKV2 hoặc online qua Zoom. Tải tài liệu trước từ group Netchat.</p>
+                </div>
+                <div>
+                    <div class="step-num">03</div>
+                    <h3 style="font-size: 24px; margin-bottom: 16px;">Thi & Nhận Chứng Nhận</h3>
+                    <p>Điểm danh + bài khảo sát + thi online tại lxp.viettel.vn. Đạt 7/10 điểm → Nhận chứng nhận hoàn thành nội bộ.</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#dang-ky" class="btn btn-primary">ĐĂNG KÝ NGAY →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="dang-ky">
+        <div class="container">
+            <div class="form-wrapper">
+                <h3 style="font-size: 28px; margin-bottom: 32px; text-align: center;">Đăng Ký Tham Gia</h3>
+                
+                <form id="registration-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label class="form-label">Mã nhân viên *</label>
+                        <input type="text" class="form-control" id="manv" placeholder="VD: VT123456" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Họ và tên *</label>
+                        <input type="text" class="form-control" id="hoten" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Đơn vị công tác *</label>
+                        <input type="text" class="form-control" id="donvi" placeholder="Nhập đơn vị" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Hình thức tham gia *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="hinhthuc" value="TrucTiep" required> Trực tiếp (tầng 5)</label>
+                            <label><input type="radio" name="hinhthuc" value="Online"> Online (Zoom)</label>
+                        </div>
+                    </div>
+
+                    <div style="margin: 32px 0 24px; border-top: 1px solid #CCC; padding-top: 24px;">
+                        <strong style="font-size: 16px; display: block; margin-bottom: 16px;">Khảo sát kiến thức đầu vào</strong>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Bạn đã có kiến thức nền về 5G chưa?</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="kienthuc" value="Chua"> Chưa biết gì</label>
+                                <label><input type="radio" name="kienthuc" value="CoBan"> Biết cơ bản</label>
+                                <label><input type="radio" name="kienthuc" value="DaBiet"> Đã có kiến thức</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Mục đích tham gia của bạn?</label>
+                            <div class="radio-group">
+                                <label><input type="checkbox" name="mucdich" value="KNL"> Lấy chứng nhận KNL</label>
+                                <label><input type="checkbox" name="mucdich" value="NangCao"> Nâng cao kiến thức</label>
+                                <label><input type="checkbox" name="mucdich" value="ApDung"> Áp dụng vào công việc</label>
+                                <label><input type="checkbox" name="mucdich" value="Khac"> Khác</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">GỬI ĐĂNG KÝ →</button>
+                    <p style="text-align: center; font-size: 12px; color: #7F7F7F; margin-top: 16px;">
+                        Thông tin của bạn được bảo mật và chỉ dùng cho mục đích đào tạo nội bộ.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-dark">
+        <div class="container faq-container">
+            <h2 class="section-title text-center">Câu Hỏi Thường Gặp</h2>
+            
+            <div class="faq-list mt-8">
+                <div class="faq-item">
+                    <button class="faq-question">Khóa học dành cho ai? <span class="faq-icon">▼</span></button>
+                    <div class="faq-answer"><p>CBCNV cần chứng nhận 5G cơ bản (KNL) và CBCNV muốn hiểu sâu về hệ thống 5G phục vụ công việc.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Tôi tham gia online có được không? <span class="faq-icon">▼</span></button>
+                    <div class="faq-answer"><p>Có. Buổi học theo hình thức Blended Learning — bạn có thể tham gia trực tiếp tại tầng 5 TTKTKV2 hoặc online qua Zoom.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Cần chuẩn bị gì trước buổi học? <span class="faq-icon">▼</span></button>
+                    <div class="faq-answer"><p>Cần có máy tính hoặc điện thoại có kết nối internet và tải sẵn tài liệu từ group Netchat trước buổi học.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Điểm thi tối thiểu để được chứng nhận là bao nhiêu? <span class="faq-icon">▼</span></button>
+                    <div class="faq-answer"><p>7/10 điểm. Bài thi thực hiện trực tuyến tại lxp.viettel.vn.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Hạn đăng ký là khi nào? <span class="faq-icon">▼</span></button>
+                    <div class="faq-answer"><p>Trước ngày 10/05/2026 (Chủ nhật). Đăng ký sớm để đảm bảo chỗ.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding final-cta text-center">
+        <div class="container">
+            <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 24px;">Đừng Bỏ Lỡ Cơ Hội Nâng Cao Kỹ Năng 5G!</h2>
+            
+            <div class="countdown" id="countdown">
+                <div class="cd-item"><span class="cd-num" id="days">00</span><span class="cd-label">Ngày</span></div>
+                <div class="cd-item"><span class="cd-num" id="hours">00</span><span class="cd-label">Giờ</span></div>
+                <div class="cd-item"><span class="cd-num" id="minutes">00</span><span class="cd-label">Phút</span></div>
+                <div class="cd-item"><span class="cd-num" id="seconds">00</span><span class="cd-label">Giây</span></div>
+            </div>
+
+            <a href="#dang-ky" class="btn btn-white">ĐĂNG KÝ NGAY</a>
+            <p style="font-size: 14px; color: #FFD5D5; margin: 16px 0 24px;">⏳ Hạn đăng ký: 10/05/2026 &nbsp;&nbsp;|&nbsp;&nbsp; 📋 Chỉ mất 2 phút để hoàn tất đăng ký</p>
+            <a href="#lien-he" style="text-decoration: underline; font-size: 14px;">📞 Cần hỗ trợ? Gọi 0975 616 363</a>
+        </div>
+    </section>
+
+    <footer id="lien-he">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <strong style="font-family: var(--font-display); font-size: 24px; color: var(--viettel-red); display: block; margin-bottom: 8px;">VIETTEL</strong>
+                    <p style="font-size: 14px; color: #CCCCCC;">Trung tâm Kỹ thuật Khu vực 2 — Đào tạo & Phát triển</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#gioi-thieu">Giới thiệu</a> | 
+                    <a href="#noi-dung">Nội dung</a> | 
+                    <a href="#thoi-gian">Thời gian</a> | 
+                    <a href="#dang-ky">Đăng ký</a> | 
+                    <a href="#lien-he">Liên hệ</a>
+                </div>
+
+                <div class="footer-contact">
+                    <p>Đ/c Trần Hồ Nhật Đông — TTr HKH, TTKTKV2</p>
+                    <p>📞 0975 616 363</p>
+                    <p>✉️ dongthn@viettel.com.vn</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2026 Trung tâm Kỹ thuật KV2 — Viettel. Bản quyền thuộc về đơn vị.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Đóng menu khi click vào link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // 2. FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const answer = button.nextElementSibling;
+                
+                // Đóng các tab khác (Single-open)
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    }
+                });
+
+                // Toggle tab hiện tại
+                item.classList.toggle('active');
+                if (item.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                } else {
+                    answer.style.maxHeight = null;
+                }
+            });
+        });
+
+        // 3. Countdown Timer
+        const targetDate = new Date('2026-05-10T23:59:59+07:00').getTime();
+        
+        const updateCountdown = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if (distance < 0) {
+                clearInterval(updateCountdown);
+                document.getElementById('countdown').innerHTML = "<div style='font-size: 24px; font-weight: bold;'>ĐÃ KẾT THÚC ĐĂNG KÝ</div>";
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        }, 1000);
+
+        // 4. Form Validation
+        const form = document.getElementById('registration-form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+            
+            // Xóa class error cũ
+            document.querySelectorAll('.form-control').forEach(input => input.classList.remove('error'));
+            
+            // Validate text inputs
+            ['manv', 'hoten', 'donvi'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el.value.trim()) {
+                    el.classList.add('error');
+                    isValid = false;
+                }
+            });
+            
+            // Validate radio (Hình thức tham gia)
+            const hinhThuc = document.querySelector('input[name="hinhthuc"]:checked');
+            if (!hinhThuc) {
+                isValid = false;
+                alert("Vui lòng chọn Hình thức tham gia!");
+            }
+            
+            if (isValid) {
+                alert("Đăng ký thành công! Dữ liệu đã được ghi nhận.");
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>
